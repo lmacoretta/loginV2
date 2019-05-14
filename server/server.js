@@ -1,9 +1,16 @@
 const express = require('express');
 const app = express();
+const morgan = require('morgan');
 
 /** Configs */
-app.use(express.json());
 require('dotenv').config();
+
+/** Middleware */
+app.use(express.json());
+app.use(morgan('dev'));
+
+/** Routes */
+app.use('/api/users', require('./routes/users'));
 
 /** Server */
 app.set('port', process.env.PORT || 4000);

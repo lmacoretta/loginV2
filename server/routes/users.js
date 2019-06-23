@@ -6,7 +6,7 @@ const validate = require('../middleware/routeMiddleware');
 
 router.route('/signUp').post(validate.signUp, UsersController.signUp);
 
-router.route('/signIn').post(UsersController.signIn);
+router.route('/signIn').post(validate.signUp, UsersController.signIn);
 
 router.route('/secret').get(UsersController.secret);
 

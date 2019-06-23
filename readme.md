@@ -1,4 +1,18 @@
-La idea de este proyecto va ser crear una web del Manchester City, donde pueda ver los partidos que jugaron, que les quedan, los jugadores que estan en el equipo. Tambien los resultados de cada partido. A su vez que pueda filtrar por ganado, empatado o perdimos.
-Por otra parte tambien el administrador se va poder logear para cargar partidos, editar las fotos de los jugadores, etc.
+La idea va ser crear un ecommerce lo mas minimalista posible. 
 
-Por ahora esta en un nivel muy inicial, por lo cual no vale la pena clonarlo para verlo.
+¿ Que se va poder hacer ?
+ - Registrarse con un usuario
+ - Comprar
+ - Recorrer el sitio
+
+¿ Que va tener el proyecto ?
+ - Registro y autentificacion de usuario con JWT.
+ - CRUD de muchas cosas.
+ - Una zona admin donde se va poder controlar todo el sitio.
+ - Diseño minimalista propio.
+ - Validacion del front y back.
+ - Entre otras cosas que voy ir haciendo.
+
+Por el momento no le voy agregar ventas ya que seria mucho mas trabajo. Lo dejo para un futuro esa implentacion.
+
+Cuando el proyecto esté finalizado lo voy a subir a Heroku.

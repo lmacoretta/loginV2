@@ -1,10 +1,21 @@
-const { check } = require('express-validator/check');
+const JWT = require('jsonwebtoken');
 
 module.exports = {
-  signUp: [
-    check('email').isEmail().withMessage('Por favor, incluya un email valido'),
-    check('password')
-      .isLength({ min: 6 }).withMessage('Por favor, ingrese un password correcto')
-      .exists()
-  ]
-};
+  auth: async (req, res, next) => {
+    const token = req.header('x-auth-token');
+
+    if (!token) {
+      return res.status(401).json({ errors: errors.array() });
+    }
+
+    try {
+      const decode = JWT.verify(token, process.env.SECRET);
+
+      req.user = decode.payload.user;
+      next();
+
+    } catch (err) {
+      res.status(400).json({ msg: 'El token no es valido' });
+    }
+  }
+}

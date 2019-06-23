@@ -3,6 +3,6 @@ require('dotenv').config();
 
 module.exports = {
   signToken: payload => {
-    return JWT.sign({ payload }, process.env.SECRET, { expiresIn: 360000 })
+    return JWT.sign({ payload }, process.env.SECRET, { expiresIn: 360000 });
   }
 }

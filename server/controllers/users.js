@@ -1,5 +1,4 @@
 const { validationResult } = require('express-validator/check');
-const JWT = require('jsonwebtoken');
 require('dotenv').config();
 
 const User = require('../models/User');
@@ -56,7 +55,7 @@ module.exports = {
         return res.status(400).json({ errors: [{ msg: 'Los password no coinciden' }] });
       }
 
-      const payload = { id: user._id };
+      const payload = { user: { id: user._id } };
 
       // Genero el token
       const token = helpers.signToken(payload);
@@ -70,7 +69,11 @@ module.exports = {
 
   secret: async (req, res, next) => {
     try {
-      console.log('secret');
-    } catch (err) { }
+      res.status(200).json({ user: req.user });
+
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server error');
+    }
   }
 };

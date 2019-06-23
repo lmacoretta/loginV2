@@ -5,7 +5,7 @@ module.exports = {
     const token = req.header('x-auth-token');
 
     if (!token) {
-      return res.status(401).json({ errors: errors.array() });
+      return res.status(401).json({ msg: 'El token no existe' });
     }
 
     try {

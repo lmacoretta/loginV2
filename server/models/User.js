@@ -14,6 +14,26 @@ const userSchema = new Schema({
     required: true,
     minlength: 6,
     maxlength: 20
+  },
+
+  name: {
+    type: String
+  },
+
+  lastname: {
+    type: String
+  },
+
+  adress: {
+    type: String
+  },
+
+  phone: {
+    type: Number
+  },
+
+  postalCode: {
+    type: Number
   }
 });
 

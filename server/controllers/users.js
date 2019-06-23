@@ -1,79 +1,69 @@
-const { validationResult } = require('express-validator/check');
-require('dotenv').config();
 
 const User = require('../models/User');
-const helpers = require('../helpers/routeHelpers');
-
 
 module.exports = {
-  signUp: async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-
-    const { email, password } = req.body;
-
+  getUsers: async (req, res, next) => {
     try {
+      const user = await User.find();
 
-      const user = await User.findOne({ email });
-
-      if (user) {
-        return res.status(400).json({ errors: [{ msg: 'El usuario ya existe' }] });
-      }
-
-      const newUser = new User({ email, password });
-
-      await newUser.save();
-
-      res.status(201).json({ msg: 'El usuario ha sido creado' });
+      res.status(200).json(user);
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server error');
     }
   },
 
-  signIn: async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-
-    const { email, password } = req.body;
-
+  getUser: async (req, res, next) => {
     try {
 
-      const user = await User.findOne({ email });
+      const user = await User.findById(req.user.id);
 
       if (!user) {
-        return res.status(400).json({ errors: [{ msg: 'El usuario no existe' }] });
+        return res.status(400).json({ msg: 'El usuario no existe' });
       }
 
-      const isMatched = await user.isValidPassword(password);
+      res.status(200).json(user);
 
-      if (!isMatched) {
-        return res.status(400).json({ errors: [{ msg: 'Los password no coinciden' }] });
-      }
-
-      const payload = { user: { id: user._id } };
-
-      // Genero el token
-      const token = helpers.signToken(payload);
-
-      res.status(200).json({ token });
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server error');
     }
   },
 
-  secret: async (req, res, next) => {
+  deleteUser: async (req, res, next) => {
     try {
-      res.status(200).json({ user: req.user });
+      const user = await User.findByIdAndDelete(req.user.id);
+
+      if (!user) {
+        return res.status(400).json({ msg: 'El usuario no existe' });
+      }
+
+      res.status(200).json({ msg: 'El usuario ha sido eliminado' });
+
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server error');
+    }
+  },
+
+  updateUser: async (req, res, next) => {
+    const { email, password } = req.body;
+    // Validar con los datos que voy a requerir si o si. Y tmbien validar que los datos introduccidos sean correctos y no cualquier verdura.
+    try {
+
+      const newData = { email, password };
+
+      const user = await User.findByIdAndUpdate(req.user.id, newData);
+
+      if (!user) {
+        return res.status(400).json({ msg: 'No se encontro el usuario' });
+      }
+
+      res.status(200).json({ msg: 'Los datos han sido actualizado', user });
 
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server error');
     }
   }
-};
+} 

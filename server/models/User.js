@@ -6,7 +6,8 @@ const userSchema = new Schema({
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    trim: true
   },
 
   password: {
@@ -17,23 +18,28 @@ const userSchema = new Schema({
   },
 
   name: {
-    type: String
+    type: String,
+    required: true
   },
 
   lastname: {
-    type: String
+    type: String,
+    required: true
   },
 
-  adress: {
-    type: String
+  cart: {
+    type: Array,
+    default: []
   },
 
-  phone: {
-    type: Number
+  history: {
+    type: Array,
+    default: []
   },
 
-  postalCode: {
-    type: Number
+  role: {
+    type: String,
+    default: 'basic'
   }
 });
 

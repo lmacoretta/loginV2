@@ -12,7 +12,7 @@ module.exports = {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { email, password } = req.body;
+    const { email, password, name, lastname } = req.body;
 
     try {
 
@@ -22,7 +22,7 @@ module.exports = {
         return res.status(400).json({ errors: [{ msg: 'El usuario ya existe' }] });
       }
 
-      const newUser = new User({ email, password });
+      const newUser = new User({ email, password, name, lastname });
 
       await newUser.save();
 

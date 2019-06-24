@@ -14,7 +14,7 @@ module.exports = {
     try {
       const newCategory = new Category({ name });
 
-      newCategory.save();
+      await newCategory.save();
 
       res.status(201).json({ msg: 'La categoria ha sido creada con exito' });
     } catch (err) {

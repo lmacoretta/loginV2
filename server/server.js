@@ -14,6 +14,7 @@ app.use(morgan('dev'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/categories', require('./routes/categories'));
+app.use('/api/company', require('./routes/company'));
 
 /** Server */
 app.set('port', process.env.PORT || 4000);

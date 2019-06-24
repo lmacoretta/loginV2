@@ -14,6 +14,10 @@ module.exports = {
     check('name').isString().not().isEmpty().withMessage('Por favor, ingrese el nombre de la categoria')
   ],
 
+  createComp: [
+    check('name').isString().not().isEmpty().withMessage('Por favor, ingrese el nombre de la compañia')
+  ],
+
   updateProfile: [
     check('email').isEmail().withMessage('Por favor, incluya un email valido').isEmpty().withMessage('El email no puede estar vacio'),
     check('password').isLength().withMessage('Por favor, ingrese un password correcto').exists().isEmpty().withMessage('El password no puede estar vacio')

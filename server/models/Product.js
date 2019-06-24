@@ -56,6 +56,10 @@ const productSchema = new Schema({
   images: {
     type: Array,
     default: []
+  },
+
+  sold: {
+    type: Number
   }
 }, { timestamps: true });
 

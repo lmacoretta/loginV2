@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
 const app = express();
-const morgan = require('morgan');
+import morgan from 'morgan';
 
 /** Configs */
 require('dotenv').config();
@@ -13,6 +13,7 @@ app.use(morgan('dev'));
 /** Routes */
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/users', require('./routes/users'));
+app.use('/api/categories', require('./routes/categories'));
 
 /** Server */
 app.set('port', process.env.PORT || 4000);

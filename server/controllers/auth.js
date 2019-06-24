@@ -1,8 +1,8 @@
-const { validationResult } = require('express-validator/check');
+import { validationResult } from 'express-validator/check';
 require('dotenv').config();
 
-const User = require('../models/User');
-const helpers = require('../helpers/routeHelpers');
+import User from '../models/User';
+import { signToken } from '../helpers/routeHelpers';
 
 
 module.exports = {
@@ -58,7 +58,7 @@ module.exports = {
       const payload = { user: { id: user._id } };
 
       // Genero el token
-      const token = helpers.signToken(payload);
+      const token = signToken(payload);
 
       res.status(200).json({ token });
     } catch (err) {

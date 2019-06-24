@@ -1,15 +1,15 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
-const UserController = require('../controllers/users');
-const privateRoute = require('../middleware/routeMiddleware');
+import { getUsers, getUser, deleteUser, updateUser } from '../controllers/users';
+import { auth, role } from '../middleware/routeMiddleware';
 
-router.route('/users').get(privateRoute.auth, UserController.getUsers);
+router.route('/users').get(auth, getUsers);
 
-router.route('/user/:id').get(privateRoute.auth, UserController.getUser);
+router.route('/user/:id').get(auth, getUser);
 
-router.route('/delete_user/:id').delete(privateRoute.auth, privateRoute.role, UserController.deleteUser);
+router.route('/delete_user/:id').delete(auth, role, deleteUser);
 
-router.route('/update_user/:id').put(privateRoute.auth, UserController.updateUser);
+router.route('/update_user/:id').put(auth, updateUser);
 
 module.exports = router;

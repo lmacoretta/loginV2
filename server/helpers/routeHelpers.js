@@ -1,4 +1,4 @@
-const JWT = require('jsonwebtoken');
+import JWT from 'jsonwebtoken';
 require('dotenv').config();
 
 module.exports = {

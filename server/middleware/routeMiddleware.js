@@ -27,7 +27,7 @@ module.exports = {
       if (user.role === 'basic' && req.method === 'GET') {
         next();
       } else {
-        return res.status(401).json({ msg: 'No tenes acceso aquí' });
+        return res.status(401).json({ msg: 'No tenes acceso aca' });
       }
 
     } catch (err) {
